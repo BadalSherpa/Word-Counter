@@ -1,6 +1,10 @@
 import React from 'react';
 import { Form, Input, Button, Row, Col } from 'antd';
+import FormItem from 'antd/lib/form/FormItem';
 import styles from './Body.module.css';
+import { useEffect, useState } from 'react';
+import TableComponent from '../common/TableComponent';
+import axios from 'axios';
 
 /**
  * @author
@@ -8,35 +12,75 @@ import styles from './Body.module.css';
  **/
 
 const Body = (props) => {
-  const onFinish = (values) => {
-    console.log('Success:', values);
+  const [showTable, setShowTable] = useState(false);
+  const [number, setNumber] = useState();
+  const [data, setData] = useState('');
+
+  //getting the input number from the form
+  const handleSubmit = (values) => {
+    console.log(values.num);
+    setNumber(values.num);
+    setShowTable(true);
   };
 
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+  //fetching the string data using axios
+  const url =
+    'https://raw.githubusercontent.com/invictustech/test/main/README.md';
+
+  const handleClick = () => {
+    setShowTable(false);
+    axios
+      .get(url)
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => console.log(`Error:${error}`));
   };
+
+  //calling handleClick function inside useEffectt
+  useEffect(() => {
+    handleClick();
+  }, []);
+
   return (
     <Col className={styles.form}>
-      <Form name='basic' onFinish={onFinish} onFinishFailed={onFinishFailed}>
-        <Form.Item
-          label='Username'
-          name='username'
+      <Form onFinish={handleSubmit} layout='vertical'>
+        <FormItem
+          name='num'
           rules={[
             {
+              pattern: '^[0-9]*$',
               required: true,
-              message: 'Please input the the number to see the top frequency',
+              type: 'string',
+              message:
+                'Please enter the number to see top words with frequency!',
             },
           ]}
+          hasFeedback
         >
-          <Input />
-        </Form.Item>
+          <Input
+            size='large'
+            placeholder='Enter the number of words that you want to see'
+          />
+        </FormItem>
 
-        <Form.Item style={{ textAlign: 'center' }}>
-          <Button type='primary' htmlType='submit'>
+        <Row>
+          <Button
+            style={{ backgroundColor: 'blue', color: '#fff' }}
+            htmlType='submit'
+            onClick={handleClick}
+            size='large'
+            block
+          >
             Submit
           </Button>
-        </Form.Item>
+        </Row>
       </Form>
+      {showTable && (
+        <Col style={{ marginTop: '50px' }}>
+          <TableComponent num={number} data={data} />
+        </Col>
+      )}
     </Col>
   );
 };
