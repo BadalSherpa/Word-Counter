@@ -37,7 +37,7 @@ const TableComponent = ({ num, data }) => {
       freqMap[w] += 1;
     });
     // console.log(freqMap);
-    return freqMap;
+    // return freqMap;
   };
 
   const sortObject = (obj) => {
@@ -65,10 +65,10 @@ const TableComponent = ({ num, data }) => {
     wordFreq();
     setArr(sortObject(freqMap));
     // eslint-disable-next-line
-  }, [wordFreq]);
+  }, []);
 
   const a = [];
-  for (var i = 0; i < num; i++) {
+  for (var i = 0; i < num && num <= arr.length; i++) {
     a.push(arr[i]);
   }
 
@@ -77,7 +77,21 @@ const TableComponent = ({ num, data }) => {
   // console.log('TO SHOW ARRAY');
   // console.log(a);
 
-  return (
+  return num > arr.length ? (
+    <Col>
+      <p
+        style={{
+          fontSize: '1rem',
+          textAlign: 'center',
+          fontWeight: 'bolder',
+          color: 'red',
+        }}
+      >
+        Please enter smaller number as the max number of words in this file is{' '}
+        {arr.length}
+      </p>
+    </Col>
+  ) : (
     <Col>
       <p
         style={{ fontWeight: 'bolder', textAlign: 'center', fontSize: '1rem' }}
