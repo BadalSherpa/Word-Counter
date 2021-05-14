@@ -1,5 +1,4 @@
 import HeaderItem from '../common/HeaderItem';
-import styles from './Header.module.css';
 
 /**
  * @author   Badal Sherpa

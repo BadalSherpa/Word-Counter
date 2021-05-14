@@ -44,6 +44,16 @@ const Body = (props) => {
 
   return (
     <Col className={styles.form}>
+      <p
+        style={{
+          fontWeight: 'bolder',
+          textAlign: 'center',
+          margin: '10px 0 10px 0',
+          fontSize: '1.2rem',
+        }}
+      >
+        The Top N frequently occurring words
+      </p>
       <Form onFinish={handleSubmit} layout='vertical'>
         <FormItem
           name='num'

@@ -6,6 +6,7 @@ import {
   GithubOutlined,
 } from '@ant-design/icons';
 import styles from './HeaderItem.module.css';
+import { Link } from 'react-router-dom';
 
 const { Header } = Layout;
 
@@ -13,8 +14,6 @@ const { Header } = Layout;
  * @author
  * @function HeaderItem
  **/
-
-const { SubMenu } = Menu;
 
 const HeaderItem = () => {
   const [state, setState] = useState('mail');
@@ -28,14 +27,18 @@ const HeaderItem = () => {
     <Header style={{ backgroundColor: '#fff', justifyContent: 'right' }}>
       <div className={styles.logo}>Invictus Word Counter</div>
       <Menu onClick={handleClick} selectedKeys={state} mode='horizontal'>
-        <Menu.Item key='mail' icon={<HomeOutlined />}>
-          Home
+        <Menu.Item key='home' icon={<HomeOutlined />}>
+          <Link to='/'>Home</Link>
         </Menu.Item>
-        <Menu.Item key='app' icon={<InfoCircleOutlined />}>
-          About
+        <Menu.Item key='about' icon={<InfoCircleOutlined />}>
+          <Link to='/about'>About</Link>
         </Menu.Item>
-        <Menu.Item key='alipay' icon={<GithubOutlined />}>
-          <a href='' target='_blank' rel='noopener noreferrer'>
+        <Menu.Item key='github' icon={<GithubOutlined />}>
+          <a
+            href='https://github.com/BadalSherpa/Word-Counter'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
             Github
           </a>
         </Menu.Item>
