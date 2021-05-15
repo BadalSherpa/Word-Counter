@@ -52,7 +52,7 @@ when the input is the number between 1 to the total words present it will displa
 
 ## when the input number is larger than the total number of words.
 
-![plot](./src/assets/Testcase-totalwords.png)
+![plot](./src/assets/Testcase-largenumber.png)
 
 when the input number is larger than the total number I have created a condition to show worning instead of the table.
 
@@ -60,7 +60,7 @@ when the input number is larger than the total number I have created a condition
 
 ![plot](./src/assets/Testcase-totalwords.png)
 
-when the total input number is the total words then it will display all the words in descending order.
+when the input number is the total words or the maximum words present in the sentence or file then it will display all the words in descending order.
 
 # Getting Started with Create React App
 
